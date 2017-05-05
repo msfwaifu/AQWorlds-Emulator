@@ -35,6 +35,7 @@ hs_err_pid*
 
 # Directories potentially created on remote AFP share
 .AppleDB
+.idea
 .AppleDesktop
 Network Trash Folder
 Temporary Items
