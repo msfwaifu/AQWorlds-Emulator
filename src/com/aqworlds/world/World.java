@@ -4,16 +4,15 @@ import com.aqworlds.AQWorlds;
 import com.aqworlds.config.ConfigData;
 import com.aqworlds.database.Database;
 import com.aqworlds.network.RequestManage;
+import com.aqworlds.world.users.UsersManage;
 import it.gotoandplay.smartfoxserver.data.Zone;
 import net.sf.json.JSONObject;
 
-import java.nio.channels.SocketChannel;
-import java.util.LinkedList;
-
 public class World {
 
-    private AQWorlds aqworlds;
+    public AQWorlds aqworlds;
     public ConfigData config;
+    public UsersManage usersManage;
     public RequestManage requestManage;
     public Database database;
     public final Zone zone;
@@ -23,7 +22,11 @@ public class World {
         this.zone = this.aqworlds.helper.getZone(this.aqworlds.getOwnerZone());
     }
 
-    public void send(JSONObject params, LinkedList<SocketChannel> channels) {
-        this.aqworlds.sendResponse(params, -1, null, channels);
+    public void sendResponse(JSONObject params) {
+        this.aqworlds.sendResponse(params, -1, null, this.zone.getChannelList());
+    }
+
+    public void sendResponse(String[] params) {
+        this.aqworlds.sendResponse(params, -1, null, this.zone.getChannelList());
     }
 }
