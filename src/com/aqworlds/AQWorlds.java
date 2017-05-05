@@ -3,12 +3,15 @@ package com.aqworlds;
 import it.gotoandplay.smartfoxserver.data.User;
 import it.gotoandplay.smartfoxserver.events.InternalEventObject;
 import it.gotoandplay.smartfoxserver.extensions.AbstractExtension;
+import it.gotoandplay.smartfoxserver.extensions.ExtensionHelper;
 import it.gotoandplay.smartfoxserver.lib.ActionscriptObject;
 
 public class AQWorlds extends AbstractExtension {
     private World world;
+    public ExtensionHelper helper;
 
     public void init() {
+        this.helper = ExtensionHelper.instance();
         this.world = new World(this);
     }
 
