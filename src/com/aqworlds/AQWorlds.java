@@ -2,6 +2,7 @@ package com.aqworlds;
 
 import com.aqworlds.config.ConfigData;
 import com.aqworlds.database.Database;
+import com.aqworlds.log.Logging;
 import com.aqworlds.network.RequestException;
 import com.aqworlds.network.RequestManage;
 import com.aqworlds.world.World;
@@ -73,6 +74,8 @@ public class AQWorlds extends AbstractExtension {
             }
         } catch (RequestException error) {
             this.world.usersManage.sendResponse(new String[]{error.getType(), error.getMessage()}, user);
+        } catch (Exception error) {
+            Logging.error(error);
         }
     }
 
