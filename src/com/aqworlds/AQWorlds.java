@@ -1,5 +1,6 @@
 package com.aqworlds;
 
+import com.aqworlds.config.ConfigData;
 import it.gotoandplay.smartfoxserver.data.User;
 import it.gotoandplay.smartfoxserver.events.InternalEventObject;
 import it.gotoandplay.smartfoxserver.extensions.AbstractExtension;
@@ -13,6 +14,7 @@ public class AQWorlds extends AbstractExtension {
     public void init() {
         this.helper = ExtensionHelper.instance();
         this.world = new World(this);
+        this.world.config = new ConfigData();
     }
 
     public void handleInternalEvent(InternalEventObject ieo) {
