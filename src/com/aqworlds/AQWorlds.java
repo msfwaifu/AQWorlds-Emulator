@@ -1,6 +1,7 @@
 package com.aqworlds;
 
 import com.aqworlds.config.ConfigData;
+import com.aqworlds.network.RequestManage;
 import com.aqworlds.world.World;
 import it.gotoandplay.smartfoxserver.data.User;
 import it.gotoandplay.smartfoxserver.events.InternalEventObject;
@@ -16,12 +17,16 @@ public class AQWorlds extends AbstractExtension {
         this.helper = ExtensionHelper.instance();
         this.world = new World(this);
         this.world.config = new ConfigData();
+        this.world.requestManage = new RequestManage();
     }
 
     public void handleInternalEvent(InternalEventObject ieo) {
         String event = ieo.getEventName();
         switch (event) {
             case "serverReady":
+                if (this.world.config.init()) {
+                    this.world.requestManage.registry();
+                }
                 break;
         }
     }
