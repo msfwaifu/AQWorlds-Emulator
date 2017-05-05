@@ -1,6 +1,7 @@
 package com.aqworlds;
 
 import com.aqworlds.config.ConfigData;
+import com.aqworlds.world.World;
 import it.gotoandplay.smartfoxserver.data.User;
 import it.gotoandplay.smartfoxserver.events.InternalEventObject;
 import it.gotoandplay.smartfoxserver.extensions.AbstractExtension;

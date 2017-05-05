@@ -1,5 +1,6 @@
-package com.aqworlds;
+package com.aqworlds.world;
 
+import com.aqworlds.AQWorlds;
 import com.aqworlds.config.ConfigData;
 import it.gotoandplay.smartfoxserver.data.Zone;
 import it.gotoandplay.smartfoxserver.extensions.AbstractExtension;
