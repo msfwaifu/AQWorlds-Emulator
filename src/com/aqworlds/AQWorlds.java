@@ -1,8 +1,10 @@
 package com.aqworlds;
 
 import com.aqworlds.config.ConfigData;
+import com.aqworlds.database.Database;
 import com.aqworlds.network.RequestManage;
 import com.aqworlds.world.World;
+import it.gotoandplay.smartfoxserver.SmartFoxServer;
 import it.gotoandplay.smartfoxserver.data.User;
 import it.gotoandplay.smartfoxserver.events.InternalEventObject;
 import it.gotoandplay.smartfoxserver.extensions.AbstractExtension;
@@ -18,6 +20,7 @@ public class AQWorlds extends AbstractExtension {
         this.world = new World(this);
         this.world.config = new ConfigData();
         this.world.requestManage = new RequestManage();
+        this.world.database = new Database(this.world.config);
     }
 
     public void handleInternalEvent(InternalEventObject ieo) {
@@ -25,7 +28,11 @@ public class AQWorlds extends AbstractExtension {
         switch (event) {
             case "serverReady":
                 if (this.world.config.init()) {
-                    this.world.requestManage.registry();
+                    if (this.world.database.connect()) {
+                        this.world.requestManage.registry();
+                    } else {
+                        SmartFoxServer.log.warning("Can't connect to database.");
+                    }
                 }
                 break;
         }
