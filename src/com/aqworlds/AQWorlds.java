@@ -8,6 +8,10 @@ import it.gotoandplay.smartfoxserver.lib.ActionscriptObject;
 public class AQWorlds extends AbstractExtension {
     private World world;
 
+    public void init() {
+        this.world = new World(this);
+    }
+
     public void handleInternalEvent(InternalEventObject ieo) {
         String event = ieo.getEventName();
         switch (event) {
