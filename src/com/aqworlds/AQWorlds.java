@@ -6,6 +6,7 @@ import com.aqworlds.network.RequestManage;
 import com.aqworlds.world.World;
 import com.aqworlds.world.users.UsersManage;
 import it.gotoandplay.smartfoxserver.SmartFoxServer;
+import it.gotoandplay.smartfoxserver.data.Room;
 import it.gotoandplay.smartfoxserver.data.User;
 import it.gotoandplay.smartfoxserver.events.InternalEventObject;
 import it.gotoandplay.smartfoxserver.extensions.AbstractExtension;
@@ -43,14 +44,17 @@ public class AQWorlds extends AbstractExtension {
                     SmartFoxServer.log.warning("Can't load configurations.");
                 }
                 break;
-            }
-            case "loginRequest": {
+            } case "loginRequest": {
                 if (this.open) {
                     String nick = ieo.getParam("nick").split("~")[1];
                     String pass = ieo.getParam("pass");
                     SocketChannel channel = (SocketChannel) ieo.getObject("chan");
                     this.world.usersManage.login(nick, pass, channel);
                 }
+            } case "userLost": case "logOut": {
+                User user = (User) ieo.getObject("user");
+                this.world.usersManage.lost(user);
+                break;
             }
         }
     }

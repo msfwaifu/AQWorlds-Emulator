@@ -31,6 +31,12 @@ public class UsersManage {
         }
     }
 
+    public void lost(User user) {
+        if (!user.properties.isEmpty()) {
+            user.properties.clear();
+        }
+    }
+
     public void sendResponse(String[] params, SocketChannel chan) {
         if (chan != null && params != null) {
             LinkedList channels = new LinkedList();
