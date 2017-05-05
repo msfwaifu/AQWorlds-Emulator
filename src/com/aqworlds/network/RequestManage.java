@@ -1,6 +1,9 @@
 package com.aqworlds.network;
 
 import com.aqworlds.network.events.FirstJoin;
+import com.aqworlds.world.World;
+import it.gotoandplay.smartfoxserver.data.Room;
+import it.gotoandplay.smartfoxserver.data.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,5 +31,9 @@ public class RequestManage {
             }
             this.requests.put(event.packet(), handler);
         }
+    }
+
+    public void handleRequest(String packet, String[] params, World world, Room room, User user) throws RequestException {
+
     }
 }

@@ -44,4 +44,12 @@ public class UsersManage {
             this.world.aqworlds.sendResponse(params, -1, null, channels);
         }
     }
+
+    public void sendResponse(String[] params, User user) {
+        if (user != null && params != null) {
+            LinkedList channels = new LinkedList();
+            channels.add(user.getChannel());
+            this.world.aqworlds.sendResponse(params, -1, null, channels);
+        }
+    }
 }

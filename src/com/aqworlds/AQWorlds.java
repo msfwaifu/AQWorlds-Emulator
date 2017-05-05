@@ -2,6 +2,7 @@ package com.aqworlds;
 
 import com.aqworlds.config.ConfigData;
 import com.aqworlds.database.Database;
+import com.aqworlds.network.RequestException;
 import com.aqworlds.network.RequestManage;
 import com.aqworlds.world.World;
 import com.aqworlds.world.users.UsersManage;
@@ -60,7 +61,19 @@ public class AQWorlds extends AbstractExtension {
     }
 
     public void handleRequest(String cmd, String[] params, User user, int fromRoom) {
-
+        try {
+            if (fromRoom != 1 && fromRoom != 32123 && fromRoom > 0) {
+                Room room = this.world.zone.getRoom(fromRoom);
+                if (room != null) {
+                    this.world.requestManage.handleRequest(cmd, params, this.world, room, user);
+                }
+            } else {
+                Room room = this.world.zone.getRoom(user.getRoom());
+                this.world.requestManage.handleRequest(cmd, params, this.world, room, user);
+            }
+        } catch (RequestException error) {
+            this.world.usersManage.sendResponse(new String[]{error.getType(), error.getMessage()}, user);
+        }
     }
 
     public void handleRequest(String cmd, ActionscriptObject ao, User user, int fromRoom) {
